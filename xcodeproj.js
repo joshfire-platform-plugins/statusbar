@@ -1,7 +1,8 @@
-// DEPRECATED (2012-07-12): to be removed once new add-ons system is up
-module.exports = {
-  "xcodeproj":function(runtime,params,callback) {
-
+/**
+ * @fileoverview xcodeproj hook that sets status bar parameters
+ */
+define([], function () {
+  return function (runtime, params, callback) {
     runtime.readPlist("Project/Info.plist",function(err,data) {
       if (err) return callback(err);
 
@@ -10,7 +11,5 @@ module.exports = {
 
       runtime.writePlist("Project/Info.plist",data,callback);
     });
-        
-
-  }
-};
+  };
+});
