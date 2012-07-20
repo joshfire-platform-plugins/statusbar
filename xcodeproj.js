@@ -1,15 +1,18 @@
-/**
- * @fileoverview xcodeproj hook that sets status bar parameters
- */
 define([], function () {
-  return function (runtime, params, callback) {
-    runtime.readPlist("Project/Info.plist",function(err,data) {
-      if (err) return callback(err);
+  return function(runtime, params, callback) {
 
-      data["UIStatusBarStyle"] = params.options.iosstyle || "UIStatusBarStyleDefault";
-      data["UIStatusBarHidden"] = !!params.options.starthidden;
+    runtime.infoPlist["UIStatusBarHidden"] = false;
+    
+    if (params.options.style=="translucent") {
+      runtime.infoPlist["UIStatusBarStyle"] = "UIStatusBarStyleBlackTranslucent";
+    } else if (params.options.style=="black") {
+      runtime.infoPlist["UIStatusBarStyle"] = "UIStatusBarStyleBlackOpaque";
+    } else if (params.options.style=="default") {
+      runtime.infoPlist["UIStatusBarStyle"] = "UIStatusBarStyleDefault";
+    } else if (params.options.style=="none") {
+      runtime.infoPlist["UIStatusBarHidden"] = true;
+    }
 
-      runtime.writePlist("Project/Info.plist",data,callback);
-    });
+    callback();
   };
 });

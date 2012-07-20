@@ -8,35 +8,30 @@
        "bar",
        "header"
    ],
-   "description":"Manage the visibility and style of the status bar on mobile platforms (current iOS-only)",
+   "description":"Manage the visibility and style of the status bar on mobile platforms (currently iOS-only)",
    "joshfire":{
 		"images":{
  	    	
- 	  	},
- 	  	"devices":["phone","tablet"],
-   		"hooks":["xcodeproj"],
-   		"options":{
+	  },
+	  "devices":["phone","tablet"],
+ 		"hooks":["xcodeproj", "startfile"],
+ 		"options":{
 			"schema":{
-				"starthidden":{
-					"type":"boolean",
-					"title":"Hide at startup",
-					"default":false
-				},
-				"iosstyle":{
-					"type":"string",
-					"title":"iOS style",
-					"enum":["UIStatusBarStyleDefault","UIStatusBarStyleBlackOpaque","UIStatusBarStyleBlackTranslucent"],
-					"default":"UIStatusBarStyleBlackOpaque"
-				}
-			},
+        "style": {
+          "type": "string",
+          "title": "Status bar style",
+          "enum":["none","black","default","translucent"],
+          "default":"none"
+        }
+      },
 			"form":[
-				"starthidden",
 				{
-					"key":"iosstyle",
+					"key":"style",
 					"titleMap":{
-						"UIStatusBarStyleBlackOpaque":"Opaque black",
-						"UIStatusBarStyleBlackOpaque":"Transparent black",
-						"UIStatusBarStyleDefault":"Gray"
+            "none":"Hidden",
+						"black":"Opaque black",
+						"translucent":"Transparent black",
+						"default":"Gray"
 					}
 				}
 			]
